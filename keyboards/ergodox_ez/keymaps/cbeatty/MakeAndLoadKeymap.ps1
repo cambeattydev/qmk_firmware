@@ -1,7 +1,7 @@
 function Make-Load-KeyMap([string] $qmkPath = "$Env:USERPROFILE\Source\Repos\qmk_firmware",
         [string] $teensyPath = "$Env:USERPROFILE\Source\Repos\teensy_loader_cli_windows"){
-    Make-KeyMap($qmkPath)
-    Load-KeyMap($qmkPath, $teensyPath)
+    Make-KeyMap $qmkPath
+    Load-KeyMap $qmkPath $teensyPath
 }
 
 function Make-KeyMap([string] $qmkPath = "$Env:USERPROFILE\Source\Repos\qmk_firmware"){
@@ -13,7 +13,6 @@ function Make-KeyMap([string] $qmkPath = "$Env:USERPROFILE\Source\Repos\qmk_firm
 function Load-KeyMap([string] $qmkPath = "$Env:USERPROFILE\Source\Repos\qmk_firmware",
         [string] $teensyPath = "$Env:USERPROFILE\Source\Repos\teensy_loader_cli_windows"){
     Push-Location $teensyPath
-    Write-Host $(pwd)
     ./teensy_loader_cli.exe -mmcu=atmega32u4 -w $qmkPath\ergodox_ez_cbeatty.hex -v
     Pop-Location
 }
