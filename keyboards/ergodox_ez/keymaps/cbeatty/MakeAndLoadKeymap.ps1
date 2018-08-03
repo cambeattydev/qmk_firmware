@@ -6,7 +6,7 @@ function Make-Load-KeyMap([string] $qmkPath = "$Env:USERPROFILE\Source\Repos\qmk
 
 function Make-KeyMap([string] $qmkPath = "$Env:USERPROFILE\Source\Repos\qmk_firmware"){
     Push-Location $qmkPath
-    wsl make ergodox_ez:cbeatty
+    C:\msys32\msys2_shell.cmd -msys -l -i -c  "cd /c/Users//Cameron.Beatty/source/repos/qmk_firmware/ && make ergodox_ez:cbeatty"
     Pop-Location
 }
 
