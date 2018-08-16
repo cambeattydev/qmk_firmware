@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * | Redo   |   1  |   2  |   3  |   4  |   5  |  6   |           |   7  |   8  |   9  |  0   |   -  |   `  |  =     |
+ * | Redo   |   1  |   2  |   3  |   4  |   5  |  6   |           |   `  |   7  |   8  |  9   |   0  |   -  |  =     |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |  Cut |           |1Shot |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |           |  L1  |------+------+------+------+------+--------|
@@ -61,9 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                               KC_LALT,
                                  MT(MOD_LSFT, KC_ENT),KC_DEL,KC_LGUI,
         // right hand
-             KC_7,   KC_8,  KC_9,   KC_0,   KC_MINS,   KC_GRV, KC_EQL,
-             OSL(CODENUM),    KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
-                          KC_H,   KC_J,  KC_K,   KC_L,   LT(MDIA, KC_SCLN),KC_QUOT,
+            KC_GRV,           KC_7,   KC_8,  KC_9,   KC_0,   KC_MINS,  KC_EQL,
+             OSL(CODENUM),    KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,     KC_BSLS,
+                              KC_H,   KC_J,  KC_K,   KC_L,   LT(MDIA, KC_SCLN),KC_QUOT,
              KC_PASTE,KC_N,   KC_M,  KC_COMM,KC_DOT, CTL_T(KC_SLSH),   KC_END,
                                   LSFT(KC_LBRC),LSFT(KC_RBRC) ,KC_LBRC,KC_RBRC,          KC_FN1,
              KC_APP,       KC_ESC,
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: Coding and numbers
  *
  * ,-------------------------------------------------------.           ,--------------------------------------------------.
- * |Escape     |  F1  |  F2  |  F3  |  F4  |  F5    | F6   |           |  F7  | F8   |  F9  |  F10 |  F11 |  F12 |  CALC  |
+ * |Escape     |  F1  |  F2  |  F3  |  F4  |  F5    | F6   |           | CALC |  F7  |  F8  |  F9  | F10  |  F11 |  F12  |
  * |-----------+------+------+------+------+--------+------|           |------+------+------+------+------+------+--------|
  * |           |   x  |   x  |   x  |   x  |Ctrl(T) |Alt ` |           |  +   |   Up |   7  |   8  |   9  |   *  |        |
  * |-----------+------+------+------+------+--------|      |           |      |------+------+------+------+------+--------|
@@ -103,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                KC_TRNS,
                                KC_TRNS,KC_TRNS,KC_TRNS,
        // right hand
-       KC_F7, KC_F8,  KC_F9 ,  KC_F10,   KC_F11,   KC_F12,  KC_CALC,
+       KC_CALC, KC_F7, KC_F8,  KC_F9 ,  KC_F10,   KC_F11,   KC_F12,
        KC_PLUS, KC_UP,   KC_7,   KC_8,    KC_9,    KC_ASTR, KC_NO ,
                 KC_DOWN, KC_4,   KC_5,    KC_6,    KC_SLSH, KC_CLEAR,
        KC_MINS, KC_AMPR, KC_1,   KC_2,    KC_3,    KC_RCTL, KC_TRNS,
