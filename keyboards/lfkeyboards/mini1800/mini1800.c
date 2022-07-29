@@ -17,6 +17,16 @@ uint16_t click_time = CLICK_MS;
 uint8_t click_toggle = CLICK_ENABLED;
 float my_song[][2] = SONG(ZELDA_PUZZLE);
 
+// Colors of the layer indicator LED
+// This list needs to define layer 0xFFFFFFFF, it is the end of the list, and the unknown layer
+__attribute__((weak))
+const Layer_Info layer_info[] = {
+    // Layer     Mask           Red     Green   Blue
+    {0x00000000, 0xFFFFFFFF, {0x00, 0xFF, 0x00}}, // base layers - green
+    {0x00000002, 0xFFFFFFFE, {0x00, 0x00, 0xFF}}, // function layer - blue
+    {0x00000004, 0xFFFFFFFC, {0xFF, 0x00, 0xFF}}, // settings layer - magenta
+    {0xFFFFFFFF, 0xFFFFFFFF, {0xFF, 0xFF, 0xFF}}, // unknown layer - REQUIRED - white
+};
 
 void matrix_init_kb(void)
 {
@@ -27,8 +37,8 @@ void matrix_init_kb(void)
     set_rgb(32, 0xFF, 0x00, 0x00);  // Layer indicator, start red
 #ifndef AUDIO_ENABLE
     // If we're not using the audio pin, drive it low
-    sbi(DDRC, 6);
-    cbi(PORTC, 6);
+    setPinOutput(C6);
+    writePinLow(C6);
 #endif
     _delay_ms(500);
 #ifdef ISSI_ENABLE
@@ -110,64 +120,6 @@ bool process_record_kb(uint16_t keycode, keyrecord_t* record)
     } else {
     }
     return process_record_user(keycode, record);
-}
-
-void action_function(keyrecord_t *event, uint8_t id, uint8_t opt)
-{
-#ifdef AUDIO_ENABLE
-    int8_t sign = 1;
-#endif
-    if(id == LFK_ESC_TILDE){
-        // Send ~ on shift-esc
-        void (*method)(uint8_t) = (event->event.pressed) ? &add_key : &del_key;
-        uint8_t shifted = get_mods() & (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT));
-        method(shifted ? KC_GRAVE : KC_ESCAPE);
-        send_keyboard_report();
-    }else if(event->event.pressed){
-        switch(id){
-            case LFK_SET_DEFAULT_LAYER:
-                // set/save the current base layer to eeprom, falls through to LFK_CLEAR
-                eeconfig_update_default_layer(1UL << opt);
-                default_layer_set(1UL << opt);
-            case LFK_CLEAR:
-                // Go back to default layer
-                layer_clear();
-                break;
-#ifdef ISSI_ENABLE
-            case LFK_LED_TEST:
-                led_test();
-                break;
-#endif
-#ifdef AUDIO_ENABLE
-            case LFK_CLICK_FREQ_LOWER:
-                sign = -1;  // continue to next statement
-            case LFK_CLICK_FREQ_HIGHER:
-                click_hz += sign * 100;
-                click(click_hz, click_time);
-                break;
-            case LFK_CLICK_TOGGLE:
-                if(click_toggle){
-                    click_toggle = 0;
-                    click(4000, 100);
-                    click(1000, 100);
-                }else{
-                    click_toggle = 1;
-                    click(1000, 100);
-                    click(4000, 100);
-                }
-                break;
-            case LFK_CLICK_TIME_SHORTER:
-                sign = -1;  // continue to next statement
-            case LFK_CLICK_TIME_LONGER:
-                click_time += sign;
-                click(click_hz, click_time);
-                break;
-#endif
-            case LFK_PLAY_ONEUP:
-                PLAY_SONG(my_song);
-                break;
-        }
-    }
 }
 
 void reset_keyboard_kb(){

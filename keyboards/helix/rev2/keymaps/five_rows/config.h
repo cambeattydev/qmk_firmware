@@ -1,26 +1,18 @@
-/*
-This is the c configuration file for the keymap
+// Copyright (c) 2022 Takeshi Ishii (mtei@github)
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-Copyright 2012 Jun Wako <wakojun@gmail.com>
-Copyright 2015 Jack Humbert
+#pragma once
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
+#undef TAPPING_TERM
+#define TAPPING_TERM 300
+#define PERMISSIVE_HOLD
+/* when TAPPING_TERM >= 500 same effect PERMISSIVE_HOLD.
+   see tmk_core/common/action_tapping.c */
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+#undef OLED_UPDATE_INTERVAL
+#ifdef DEBUG_MATRIX_SCAN_RATE
+#    define OLED_UPDATE_INTERVAL 500
+#else
+#    define OLED_UPDATE_INTERVAL 50
+#endif
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-#ifndef CONFIG_USER_H
-#define CONFIG_USER_H
-
-// place overrides here
-
-#endif /* CONFIG_USER_H */

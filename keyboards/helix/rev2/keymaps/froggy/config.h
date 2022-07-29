@@ -26,4 +26,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ONESHOT_TAP_TOGGLE 5 /* Tapping this number of times holds the key until tapped this number of times again. */
 #define ONESHOT_TIMEOUT 5000 /* Time (in ms) before the one shot key is released */
 
+// the froggy keymap does not use the right hand side, so sync_timer is not needed
+#define DISABLE_SYNC_TIMER
+// For the same reason, the following are also not needed
+#undef SPLIT_LAYER_STATE_ENABLE
+#undef SPLIT_LED_STATE_ENABLE
+
+// If you need more program area, try select and reduce rgblight modes to use.
+
+// Selection of RGBLIGHT MODE to use.
+#if defined(LED_ANIMATIONS)
+   #define RGBLIGHT_EFFECT_BREATHING
+   #define RGBLIGHT_EFFECT_RAINBOW_MOOD
+   #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+   #define RGBLIGHT_EFFECT_SNAKE
+   #define RGBLIGHT_EFFECT_KNIGHT
+   #define RGBLIGHT_EFFECT_CHRISTMAS
+   #define RGBLIGHT_EFFECT_STATIC_GRADIENT
+   //#define RGBLIGHT_EFFECT_RGB_TEST
+   //#define RGBLIGHT_EFFECT_ALTERNATING
+#endif
+
 #endif /* CONFIG_USER_H */
